@@ -33,3 +33,13 @@
     ((superclass element-class)
      (class svg-element-class))
   t)
+
+
+(defvar *element-class-map* (make-hash-table :test #'equal))
+
+(defmethod shared-initialize :around ((class svg-element-class) slot-names &key)
+  (declare (ignore slot-names))
+  ;; as there are overlapping/duplicate element names/classes between svg and html
+  ;; we need to specify the correct hash-table for writing.
+  (let ((*element-class-map* *svg-element-class-map*))
+    (call-next-method)))
