@@ -1,0 +1,9 @@
+#+LATEX_CLASS: stw-documentation
+#+TITLE: STW-SVG-PARSE
+#+AUTHOR: Liam Howley
+
+#+OPTIONS: toc
+
+** Introduction
+
+STW-SVG-PARSE is a work in progress. It is recommended to read the STW-XML-PARSE documentation. If the svg document is to be embedded in a html document, read also the STW-HTML-PARSE documentation.
