@@ -6,7 +6,7 @@
 	   :reader status)))
 
 (defclass svg-direct-slot-definition (xml-direct-slot-definition)
-  ((animatable :initarg :animateable :initform t :type boolean :reader animatable))
+  ((animatable :initarg :animatable :initform t :type boolean :reader animatable))
   (:documentation "default class representing svg attribute slots"))
 
 (defclass svg-effective-slot-definition (xml-effective-slot-definition)
@@ -35,7 +35,7 @@
   t)
 
 
-(defvar *element-class-map* (make-hash-table :test #'equal))
+(defvar *svg-element-class-map* (make-hash-table :test #'equal))
 
 (defmethod shared-initialize :around ((class svg-element-class) slot-names &key)
   (declare (ignore slot-names))
