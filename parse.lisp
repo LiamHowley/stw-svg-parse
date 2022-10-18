@@ -13,6 +13,39 @@
     (call-next-method)))
 
 
+(defvar *embedded* nil "SVG inherits html rules and behaviours when embedded in a html doc, 
+otherwise it is bound by XML rules.")
+
+
+(defmethod bind-node ((parent-node dom-node) (child-node svg))
+  (let ((*embedded* t))
+    (call-next-method)))
+
+
+(defmethod read-attribute-value ((slot html-direct-slot-definition) attribute slot-type)
+  (declare (inline match-character))
+  (if *embedded*
+      (let* ((char (stw-read-char))
+	     (reader (read-and-decode (match-character char))))
+	(case char
+	  (:eof nil)
+	  (#\=
+	   (next)
+	   (read-attribute-value slot attribute slot-type))
+	  ((#\" #\')
+	   (next)
+	   (funcall reader))
+	  ((#\newline #\space #\>)
+	   nil)
+	  (t 
+	   (funcall
+	    (read-and-decode #'(lambda (test-char)
+				 (when (or (char= test-char #\space)
+					   (char= test-char #\>))
+				   test-char)))))))
+      (call-next-method)))
+
+
 (defmethod map-attribute ((res (eql 'event-*)) attribute length)
   (declare (ignore length))
   (prepare-slot node result)
