@@ -11,7 +11,9 @@
   (:import-from
    :stw.util
    :ensure-list
-   :parse-stream)
+   :parse-stream
+   :match-string
+   :read-until)
 
   (:import-from
    :closer-mop
@@ -25,6 +27,8 @@
 
    ;; specials
    :*preserve-whitespace*
+   :*end-script*
+   :*end-style*
 
    ;; meta
    :element-class

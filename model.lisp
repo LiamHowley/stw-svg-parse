@@ -1,5 +1,11 @@
 (in-package svg.parse)
 
+(defvar *end-script*)
+
+(defvar *end-style*)
+
+(defclass svg-document-node (xml-document-node)
+  ())
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
@@ -464,13 +470,16 @@
    (required-extensions :attribute "requiredExtensions" :animatable nil)
    (path-length :attribute "pathLength")))
 
-(define-svg-node svg-script (uncategorized-element never-rendered-element)
+(define-svg-node svg-script (uncategorized-element never-rendered-element content-node)
   ((href :animatable nil)
    (script-type :attribute "type" :initarg :type)
    (xlink-href :attribute "xlink:href" :animatable nil)
    (xlink-title :attribute "xlink:title" :animatable nil)
    crossorigin)
   (:element . "script"))
+
+(defmethod initialize-instance :before ((class svg-script) &key)
+  (setf (slot-value class 'closing-tag) *end-script*))
 
 (define-svg-node svg-set (animation-element)
   ((attribute-name :attribute "attributeName")
@@ -490,11 +499,15 @@
 (define-svg-node stop (gradient-element)
   (offset))
 
-(define-svg-node svg-style (uncategorized-element never-rendered-element)
+(define-svg-node svg-style (uncategorized-element never-rendered-element content-node)
   ((media :animatable nil)
    (style-type :attribute "type" :initarg :type)
    (svg-title :animatable nil :attribute "title"))
   (:element . "style"))
+
+(defmethod initialize-instance :before ((class svg-style) &key)
+  (setf (slot-value class 'closing-tag) *end-style*))
+
 
 (define-svg-node svg (structural-element renderable-element container-element)
   ((svg-aria-* :type svg-aria-*)
