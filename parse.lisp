@@ -1,5 +1,11 @@
 (in-package svg.parse)
 
+(defmethod parse-document ((document svg-document-node) &key (parser #'read-element) preserve-whitespace)
+  (let ((*end-script* (read-until (match-string "</script>" nil)))
+	(*end-style* (read-until (match-string "</style>" nil)))
+	(*element-class-map* *svg-element-class-map*))
+    (call-next-method)))
+
 (defmethod initialize-instance :around ((child-node svg) &key)
   "As there are overlapping/duplicate element names/classes between svg and html
    we need to specify the correct hash-table for reading."
