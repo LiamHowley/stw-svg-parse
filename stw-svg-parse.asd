@@ -15,4 +15,5 @@
 	       (:file "print"))
   :long-description
   #.(uiop:read-file-string
-     (uiop:subpathname *load-pathname* "docs/README.org")))
+     (uiop:subpathname *load-pathname* "docs/README.org"))
+  :in-order-to ((test-op (load-op :stw-svg-test))))
