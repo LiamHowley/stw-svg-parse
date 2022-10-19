@@ -34,8 +34,14 @@
      (class svg-element-class))
   t)
 
-
-(defvar *svg-element-class-map* (make-hash-table :test #'equal))
+(defvar *svg-element-class-map*
+  (let ((table (make-hash-table :test #'equal)))
+    (maphash #'(lambda (element class)
+		 (setf (gethash element table) class))
+	     *element-class-map*)
+    table)
+  "Copying the elements from XML.PARSE:*ELEMENT-CLASS-MAP* 
+as they may well be called upon during parsing.")
 
 (defmethod shared-initialize :around ((class svg-element-class) slot-names &key)
   (declare (ignore slot-names))
