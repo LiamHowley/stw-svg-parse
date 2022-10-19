@@ -1,10 +1,12 @@
 (in-package svg.parse)
 
+
 (defmethod parse-document ((document svg-document-node) &key (parser #'read-element) preserve-whitespace)
   (let ((*end-script* (read-until (match-string "</script>" nil)))
 	(*end-style* (read-until (match-string "</style>" nil)))
 	(*element-class-map* *svg-element-class-map*))
     (call-next-method)))
+
 
 (defmethod initialize-instance :around ((child-node svg) &key)
   "As there are overlapping/duplicate element names/classes between svg and html
@@ -22,7 +24,7 @@ otherwise it is bound by XML rules.")
     (call-next-method)))
 
 
-(defmethod read-attribute-value ((slot html-direct-slot-definition) attribute slot-type)
+(defmethod read-attribute-value ((slot svg-direct-slot-definition) attribute slot-type)
   (declare (inline match-character))
   (if *embedded*
       (let* ((char (stw-read-char))
