@@ -12,23 +12,23 @@
   :parent test-parse
   (of-type 'svg-document-node *parsed-markup*)
   (let ((element (car (get-elements-by-tagname *parsed-markup* "a" *svg-element-class-map*))))
-    (of-type 'svg-a element)
+    (of-type 'svg.parse::svg-a element)
     (of-type 'svg.parse::svg-element-class (class-of element)))
   (of-type 'element-node (car (slot-value *parsed-markup* 'child-nodes)))
-  (of-type 'svg (get-element-with-attribute *parsed-markup* "id"))
-  (of-type 'svg (get-element-with-attribute-value *parsed-markup* "id" "container1"))
+  (of-type 'svg.parse::svg (get-element-with-attribute *parsed-markup* "id"))
+  (of-type 'svg.parse::svg (get-element-with-attribute-value *parsed-markup* "id" "container1"))
   ;; this is svg where attribute values can only be a string. This should be false
   (let ((element (get-element-with-attribute-value *parsed-markup* "class" "container")))
-    (true (typep element 'svg)))
+    (true (typep element 'svg.parse::svg)))
   (let ((element (get-elements-with-attribute-value *parsed-markup* "class" "container" "square")))
-    (true (typep (car element) 'svg))
-    (true (typep (cadr element) 'circle)))
+    (true (typep (car element) 'svg.parse::svg))
+    (true (typep (cadr element) 'svg.parse::circle)))
   (let ((element (get-element-with-attribute-values *parsed-markup* "class" "container" "contained")))
-    (false (typep element 'svg)))
+    (false (typep element 'svg.parse::svg)))
   (let ((text-nodes (retrieve-text-nodes *parsed-markup*)))
     (is string= ">" (text (car text-nodes)))
     (is string= "<" (text (cadr text-nodes)))
-    (of-type 'svg-title (get-next-sibling (parent-node (car text-nodes))))))
+    (of-type 'svg.parse::svg-title (get-next-sibling (parent-node (car text-nodes))))))
 
 (define-test reader...
   :parent test-parse
@@ -37,8 +37,8 @@
   (true (set-reader #'read-svg))
   (let* ((document-node (read-from-string "<a href='/some-url'>url</a>"))
 	 (child-node (car (slot-value document-node 'child-nodes))))
-    (true (slot-exists-p child-node 'href))
-    (is string= "/some-url" (slot-value child-node 'href))
+    (true (slot-exists-p child-node 'svg.parse::href))
+    (is string= "/some-url" (slot-value child-node 'svg.parse::href))
     (is string= "url" (text (car (slot-value child-node 'child-nodes))))
     (of-type 'readtable (remove-reader))))
 
