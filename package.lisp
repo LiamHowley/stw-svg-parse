@@ -26,6 +26,7 @@
   (:export
 
    ;; specials
+   :*svg-element-class-map*
    :*preserve-whitespace*
    :*end-script*
    :*end-style*
@@ -47,13 +48,13 @@
    :content-node
    :text-node
    :whitespace-node
+   :svg
 
    :sgml-node
    :!--
 
    ;; functions
    :parse-document
-   :read-from-file
    :read-element
    :read-element-name
    :read-element-attributes
@@ -94,15 +95,12 @@
    :get-previous-sibling
    :query-select
    :query-select-all
-   :attribute-value
    :remove-node
    :add-node
    :insert-before
    :insert-after
    :first-of-type
-   :last-of-type
-   :get-elements-by-class
-   :get-element-by-id)
+   :last-of-type)
 
   (:export
    :remove-reader
