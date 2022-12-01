@@ -467,7 +467,8 @@
   ((svg-aria-* :type svg-aria-*)
    (system-language :attribute "systemLanguage" :animatable nil)
    (required-extensions :attribute "requiredExtensions" :animatable nil)
-   (path-length :attribute "pathLength")))
+   (path-length :attribute "pathLength")
+   width height))
 
 (define-svg-node svg-script (uncategorized-element never-rendered-element content-node)
   ((href :animatable nil)
@@ -509,6 +510,9 @@
 
 (define-svg-node svg (structural-element renderable-element container-element)
   ((svg-aria-* :type svg-aria-*)
+   (base-profile :attribute "baseProfile" :animatable nil :status :deprecated)
+   (content-script-type :attribute "contentScriptType" :animatable nil :status :deprecated)
+   (content-style-type :attribute "contentStyleType" :animatable nil :status :deprecated)
    (required-extensions :attribute "requiredExtensions" :animatable nil)
    (system-language :attribute "systemLanguage" :animatable nil)
    (playbackorder :animatable nil)
@@ -521,8 +525,9 @@
    (timelinebegin :animatable nil)
    (view-box :attribute "viewBox")
    (zoom-and-pan :attribute "zoomAndPan")
-   (xmlns :animatable nil)
-   transform))
+   (xmlns :animatable nil :initform "http://www.w3.org/2000/svg")
+   (version :status :deprecated)
+   transform width height x y))
 
 (define-svg-node svg-symbol (structural-element renderable-element never-rendered-element container-element)
   ((svg-aria-* :type svg-aria-*)
