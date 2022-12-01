@@ -6,4 +6,4 @@
 
 ** Introduction
 
-STW-SVG-PARSE is a work in progress. It is recommended to read the STW-XML-PARSE documentation. If the svg document is to be embedded in a html document, read also the STW-HTML-PARSE documentation.
+STW-SVG-PARSE is a work in progress. It is recommended to read the [[https://github.com/liamhowley/stw-xml-parse][STW-XML-PARSE]] documentation. If the svg document is to be embedded in a html document, read also the [[https://github.com/liamhowley/stw-html-parse][STW-HTML-PARSE]] documentation.
