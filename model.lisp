@@ -94,7 +94,8 @@
     (aria-activedescendant aria-atomic aria-autocomplete aria-busy aria-checked aria-colcount aria-colindex aria-colspan aria-controls aria-current aria-describedby aria-details aria-disabled aria-dropeffect aria-errormessage aria-expanded aria-flowto aria-grabbed aria-haspopup aria-hidden aria-invalid aria-keyshortcuts aria-label aria-labelledby aria-live aria-modal aria-multiline aria-multiselectable aria-orientation aria-owns aria-placeholder aria-posinset aria-pressed aria-readonly aria-relevant aria-required aria-roledescription aria-rowcount aria-rowindex aria-rowspan aria-selected aria-setsize aria-sort aria-valuemax aria-valuemin aria-valuenow aria-valuetext aria-level role))
 
   (defvar *svg-presentation-attributes*
-    `(alignment-baseline baseline-shift clip-path clip-rule color color-interpolation color-interpolation-filters color-rendering cursor direction display dominant-baseline fill-opacity fill-rule filter flood-color flood-opacity font-family font-size font-size-adjust font-stretch font-style font-variant font-weight glyph-orientation-horizontal glyph-orientation-vertical image-rendering letter-spacing lighting-color marker-end marker-mid marker-start mask opacity overflow paint-order pointer-events shape-rendering stop-color stop-opacity stroke stroke-dasharray stroke-dashoffset stroke-linecap stroke-linejoin stroke-miterlimit stroke-opacity stroke-width text-anchor text-decoration text-overflow text-rendering unicode-bidi vector-effect visibility white-space word-spacing writing-mode))
+    `((svg-fill :attribute "fill")
+      alignment-baseline baseline-shift clip-path clip-rule color color-interpolation color-interpolation-filters color-rendering cursor direction display dominant-baseline fill-opacity fill-rule filter flood-color flood-opacity font-family font-size font-size-adjust font-stretch font-style font-variant font-weight glyph-orientation-horizontal glyph-orientation-vertical image-rendering letter-spacing lighting-color marker-end marker-mid marker-start mask opacity overflow paint-order pointer-events shape-rendering stop-color stop-opacity stroke stroke-dasharray stroke-dashoffset stroke-linecap stroke-linejoin stroke-miterlimit stroke-opacity stroke-width text-anchor text-decoration text-overflow text-rendering unicode-bidi vector-effect visibility white-space word-spacing writing-mode))
 
   (defvar *svg-global-attributes*
     '((svg-space :attribute "xml:space" :initarg :space :reader svg-space)
@@ -102,7 +103,6 @@
       (base :attribute "xml:base" :initarg :base :reader base)
       (data-* :initarg :data-* :type multiple-attributes :accessor data-*)
       (event-* :initarg :event-* :type svg-global-event-attribute)
-      (presentation-* :initarg :presentation-* :type presentation-attribute :reader presentation-*)
       (svg-class :attribute "class" :initarg :class :type cons :accessor svg-class)
       (svg-style :attribute "style")
       id tabindex))
@@ -121,7 +121,6 @@
       (system-language :attribute "systemLanguage")
       (svg-restart :attribute "restart")
       (svg-values :attribute "values")
-      (svg-fill :attribute "fill")
       href begin by dur end from to additive accumulate onbegin onend onrepeat)))
 
 
@@ -490,7 +489,6 @@
    (required-extensions :attribute "requiredExtensions")
    (system-language :attribute "systemLanguage" :animatable nil)
    (svg-restart :attribute "restart")
-   (svg-fill :attribute "fill")
    dur begin end from href onbegin onend onrepeat))
 
 (define-svg-node solidcolor (paint-server-element)
