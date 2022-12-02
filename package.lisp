@@ -1,7 +1,6 @@
 (in-package :cl-user)
 
 (defpackage svg.parse
-  (:nicknames :svg)
   (:use :cl :xml.parse)
 
   (:import-from
