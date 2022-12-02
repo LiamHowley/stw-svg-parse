@@ -38,7 +38,7 @@
   (let* ((document-node (read-from-string "<a href='/some-url'>url</a>"))
 	 (child-node (car (slot-value document-node 'child-nodes))))
     (true (slot-exists-p child-node 'svg.parse::href))
-    (is string= "/some-url" (slot-value child-node 'svg.parse::href))
+    (is string= "/some-url" (svg-parse-href child-node))
     (is string= "url" (text (car (slot-value child-node 'child-nodes))))
     (of-type 'readtable (remove-reader))))
 
