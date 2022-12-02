@@ -144,8 +144,8 @@
 
 	     ;; set animatable to nil for animation attributes
 	     ;; and add common attributes to relevant slots.
-	     (push nil (cdr slot))
-	     (push :animatable (cdr slot)))
+	     (pushnew nil (cdr slot))
+	     (pushnew :animatable (cdr slot)))
 	collect slot)
      (:metaclass svg-element-class)
      ,@rest))
