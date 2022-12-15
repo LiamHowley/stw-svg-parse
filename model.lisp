@@ -101,7 +101,7 @@
     '((svg-space :attribute "xml:space" :initarg :space :reader svg-space)
       (lang :attribute "xml:lang" :animatable nil)
       (base :attribute "xml:base" :initarg :base :reader base)
-      (data-* :initarg :data-* :type multiple-attributes :accessor data-*)
+      (data-* :initarg :data-* :type multiple-attributes)
       (event-* :initarg :event-* :type svg-global-event-attribute)
       (svg-class :attribute "class" :initarg :class :type cons :accessor svg-class)
       (svg-style :attribute "style")
