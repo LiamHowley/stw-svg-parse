@@ -1,12 +1,5 @@
 (in-package svg.parse)
 
-(defvar *end-script*)
-
-(defvar *end-style*)
-
-(defclass svg-document-node (xml-document-node)
-  ())
-
 (eval-when (:compile-toplevel :load-toplevel :execute)
 
   (defclass animation-element ()
@@ -82,7 +75,7 @@
     (:metaclass singleton-class))
 
 
-  (defclass-with-initargs svg-global-event-attribute ()
+  (defclass-with-initargs svg-event-* ()
     (oncancel oncanplay oncanplaythrough onchange onclick onclose oncuechange ondblclick ondrag ondragend ondragenter ondragleave ondragover ondragstart ondrop ondurationchange onemptied onended onerror onfocus oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata onloadedmetadata onloadstart onmousedown onmouseenter onmouseleave onmousemove onmouseout onmouseover onmouseup onmousewheel onpause onplay onplaying onprogress onratechange onreset onresize onscroll onseeked onseeking onselect onshow onstalled onsubmit onsuspend ontimeupdate ontoggle onvolumechange onwaiting))
 
 
@@ -102,10 +95,11 @@
       (lang :attribute "xml:lang" :animatable nil)
       (base :attribute "xml:base" :initarg :base :reader base)
       (data-* :initarg :data-* :type multiple-attributes)
-      (event-* :initarg :event-* :type svg-global-event-attribute)
+      (svg-event-* :initarg :event-* :type svg-event-*)
       (svg-class :attribute "class" :initarg :class :type cons :accessor svg-class)
       (svg-style :attribute "style")
       id tabindex))
+
 
   (defvar *animation-nodes* `(animate animate-motion animate-transform svg-set))
 
@@ -122,6 +116,12 @@
       (svg-restart :attribute "restart")
       (svg-values :attribute "values")
       href begin by dur end from to additive accumulate onbegin onend onrepeat)))
+
+(defmethod slot-unbound ((class svg-element-class) object (slot-name (eql 'event-*)))
+  (setf (slot-value object 'event-*) (make-instance 'svg-global-event-attribute)))
+
+(defmethod slot-unbound ((class svg-element-class) object (slot-name (eql 'svg-aria-*)))
+  (setf (slot-value object 'svg-aria-*) (make-instance 'svg-aria-*)))
 
 
 (defmacro define-svg-node (name supers slots &rest rest)
@@ -479,7 +479,7 @@
   (:element . "script"))
 
 (defmethod initialize-instance :before ((class svg-script) &key)
-  (setf (slot-value class 'closing-tag) *end-script*))
+  (setf (slot-value class 'closing-tag) "</script>"))
 
 (define-svg-node svg-set (animation-element)
   ((attribute-name :attribute "attributeName")
@@ -505,7 +505,7 @@
   (:element . "style"))
 
 (defmethod initialize-instance :before ((class svg-style) &key)
-  (setf (slot-value class 'closing-tag) *end-style*))
+  (setf (slot-value class 'closing-tag) "</style>"))
 
 
 (define-svg-node svg (structural-element renderable-element container-element)

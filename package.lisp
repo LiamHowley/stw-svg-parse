@@ -9,14 +9,20 @@
 
   (:import-from
    :stw.util
+   :stw-read-char
+   :next
    :ensure-list
    :parse-stream
    :match-string
-   :read-until)
+   :match-character
+   :consume-until
+   :read-until
+   :read-and-decode)
 
   (:import-from
    :closer-mop
    :slot-definition-name
+   :slot-definition-type
    :effective-slot-definition-class
    :direct-slot-definition-class
    :compute-effective-slot-definition
@@ -37,8 +43,6 @@
    ;; model
    :define-svg-node
    :document-node
-   :xml-document-node
-   :svg-document-node
    :dom-node
    :standard-element-node
    :element-node
@@ -63,6 +67,7 @@
    :read-into
    :read-subelements
    :bind-child-node
+   :attribute-value-predicate
    :prepare-slot
    :assign-value
    :parse-value

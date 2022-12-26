@@ -2,6 +2,7 @@
   :description "Test suite for stw-svg-parse."
   :depends-on ("parachute"
 	       "stw-xml-parse"
+	       "stw-html-parse"
 	       "stw-svg-parse")
   :serial t
   :components ((:file "package")
