@@ -68,7 +68,6 @@
    :read-subelements
    :bind-child-node
    :attribute-value-predicate
-   :prepare-slot
    :assign-value
    :parse-value
    :get-element-name
