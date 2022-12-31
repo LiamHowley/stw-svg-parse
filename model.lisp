@@ -476,10 +476,8 @@
    (xlink-href :attribute "xlink:href" :animatable nil)
    (xlink-title :attribute "xlink:title" :animatable nil)
    crossorigin)
-  (:element . "script"))
-
-(defmethod initialize-instance :before ((class svg-script) &key)
-  (setf (slot-value class 'closing-tag) "</script>"))
+  (:element . "script")
+  (:closing-tag . "</script>"))
 
 (define-svg-node svg-set (animation-element)
   ((attribute-name :attribute "attributeName")
@@ -502,11 +500,8 @@
   ((media :animatable nil)
    (style-type :attribute "type" :initarg :type)
    (svg-title :animatable nil :attribute "title"))
-  (:element . "style"))
-
-(defmethod initialize-instance :before ((class svg-style) &key)
-  (setf (slot-value class 'closing-tag) "</style>"))
-
+  (:element . "style")
+  (:closing-tag . "</style>"))
 
 (define-svg-node svg (structural-element renderable-element container-element)
   ((svg-aria-* :type svg-aria-*)
