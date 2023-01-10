@@ -8,6 +8,10 @@
    :singleton-class)
 
   (:import-from
+   :cl-comp
+   :filter-slots-by-type)
+
+  (:import-from
    :stw.util
    :stw-read-char
    :next
@@ -23,6 +27,7 @@
    :closer-mop
    :slot-definition-name
    :slot-definition-type
+   :standard-direct-slot-definition
    :effective-slot-definition-class
    :direct-slot-definition-class
    :compute-effective-slot-definition
@@ -33,8 +38,7 @@
    ;; specials
    :*svg-element-class-map*
    :*preserve-whitespace*
-   :*end-script*
-   :*end-style*
+   :*embedded*
 
    ;; meta
    :element-class

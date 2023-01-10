@@ -1,21 +1,6 @@
 (in-package svg.parse)
 
 
-(defvar *embedded* nil "SVG inherits html rules and behaviours when embedded in a html doc, 
-otherwise it is bound by XML rules.")
-
-
-(defmethod initialize-instance :around ((node svg) &key parent-node)
-  "As there are overlapping/duplicate element names/classes between svg and html
-   we need to specify the correct hash-table for reading."
-  (let ((*element-class-map* *svg-element-class-map*))
-    (if parent-node
-	(let ((*embedded* t))
-	  (call-next-method))
-	(call-next-method))))
-
-
-
 (declaim (ftype (function (character symbol) (or function null)) attribute-value-predicate)
 	 (inline attribute-value-predicate))
 
